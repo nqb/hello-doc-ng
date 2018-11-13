@@ -46,8 +46,3 @@ test2:
   script: 
     - echo "Do another parallel test here"
     - echo "For example run a lint test"
-   
-deploy1:
-  stage: deploy
-  script:
-    - echo "Do your deploy here"
