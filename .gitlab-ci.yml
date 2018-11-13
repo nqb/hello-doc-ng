@@ -24,7 +24,7 @@ build:debian:
   image: debian:jessie-slim
   stage: build
   script:
-    - apt install asciidoctor -y
+    - apt-get update && apt-get install asciidoctor -y
     - make html
 
 build:centos:
