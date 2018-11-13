@@ -31,7 +31,7 @@ build:centos:
   image: centos:latest
   stage: build
   script:
-    - yum install epel-release
+    - yum install -y epel-release
     - yum install -y asciidoctor
     - make html
 
