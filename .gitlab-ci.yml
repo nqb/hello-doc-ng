@@ -25,6 +25,8 @@ build:debian:
   stage: build
   script:
     - apt-get update && apt-get install asciidoctor -y
+    - echo "Install build tools"
+    - apt-get install build-essential
     - make html
 
 build:centos:
@@ -33,6 +35,8 @@ build:centos:
   script:
     - yum install -y epel-release
     - yum install -y asciidoctor
+    - echo "Install build tools"
+    - yum groupinstall "Development Tools" -y
     - make html
 
 test1:
