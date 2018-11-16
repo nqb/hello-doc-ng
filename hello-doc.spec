@@ -1,11 +1,11 @@
 Name:           hello-doc
-Version:        1.1
+Version:        1.2
 Release:        1%{?dist}
 Summary:        Hello Doc project to test CI/CD pipeline
 
 License:        GPLv3+
 URL:            https://gitlab.com/nqb1/%{name}
-Source0:        https://gitlab.com/nqb1/%{name}-%{version}.tar.gz
+Source0:        https://gitlab.com/nqb1/%{name}/-/archive/v%{version}/%{name}-v%{version}.tar.gz
 
 BuildRequires:  make
 BuildRequires:  asciidoctor
