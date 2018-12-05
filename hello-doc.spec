@@ -1,5 +1,5 @@
 Name:           hello-doc
-Version:        1.4
+Version:        1.5
 Release:        1%{?dist}
 Summary:        Hello Doc project to test CI/CD pipeline
 
@@ -8,6 +8,7 @@ URL:            https://gitlab.com/nqb1/%{name}
 Source0:        https://gitlab.com/nqb1/%{name}/-/archive/%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:  make
+BuildRequires:  ruby
 BuildRequires:  asciidoctor
 
 Requires:       httpd
