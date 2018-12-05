@@ -1,6 +1,6 @@
 Name:           hello-doc
-Version:        1.3
-Release:        2%{?dist}
+Version:        1.4
+Release:        1%{?dist}
 Summary:        Hello Doc project to test CI/CD pipeline
 
 License:        GPLv3+
@@ -38,6 +38,8 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Dec 05 2018 Nicolas Quiniou-Briand <nqb@inverse.ca> - 1.4-1
+- Last fix before a great build
 * Wed Dec 05 2018 Nicolas Quiniou-Briand <nqb@inverse.ca> - 1.3-2
 - Remove 'v' from git tags
 * Wed Dec 05 2018 Nicolas Quiniou-Briand <nqb@inverse.ca> - 1.3-1
