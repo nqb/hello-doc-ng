@@ -1,5 +1,5 @@
 Name:           hello-doc
-Version:        1.2
+Version:        1.3
 Release:        1%{?dist}
 Summary:        Hello Doc project to test CI/CD pipeline
 
@@ -38,5 +38,7 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Dec 05 2018 Nicolas Quiniou-Briand <nqb@inverse.ca> - 1.3-1
+- Fix issue with tar format in upstream sources
 * Fri Nov 16 2018 Nicolas Quiniou-Briand <nqb@inverse.ca> - 1.1-1
 - First hello-doc package
