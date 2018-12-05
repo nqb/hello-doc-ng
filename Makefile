@@ -1,5 +1,5 @@
 html: README.asciidoc
-	asciidoctor \
+	/usr/bin/asciidoctor \
 		-n \
 		$<
 
