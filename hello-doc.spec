@@ -1,5 +1,5 @@
 Name:           hello-doc
-Version:        1.6
+Version:        1.7
 Release:        1%{?dist}
 Summary:        Hello Doc project to test CI/CD pipeline
 
@@ -39,6 +39,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Dec 06 2018 nqb <nqb@users.noreply.github.com> 1.7-1
+- new package built with tito
+
 * Wed Dec 05 2018 Nicolas Quiniou-Briand <nqb@inverse.ca> - 1.6-1
 - Ruby dependency
 * Wed Dec 05 2018 Nicolas Quiniou-Briand <nqb@inverse.ca> - 1.4-1
