@@ -8,8 +8,8 @@ before_script:
   - unset http_proxy ; unset https_proxy
   - env | grep ^CI_
 
-build_debian_stretch:
-  image: buildpkg/debian:stretch
+build_centos_7:
+  image: buildpkg/centos:7
   stage: build
   script:
      - ci-build-pkg
@@ -20,9 +20,9 @@ build_debian_stretch:
   tags:
     - docker
 
-build_ubuntu_zesty:
-  image: buildpkg/ubuntu:zesty
-  stage: build
+build_fedora_25:
+  image: buildpkg/fedora:25
+ stage: build
   script:
      - ci-build-pkg
   artifacts:
@@ -31,6 +31,7 @@ build_ubuntu_zesty:
       - result/*
   tags:
     - docker
+
 
 sign:
   image: buildpkg/debian:stretch
@@ -41,8 +42,8 @@ sign:
   script:
     - ci-sign-pkg
   dependencies:
-    - build_debian_stretch
-    - build_ubuntu_zesty
+    - build_centos_7
+    - build_fedora_25
   artifacts:
     expire_in: 1 day
     paths:
@@ -55,7 +56,7 @@ pages:
   image: buildpkg/debian:stretch
   stage: deploy
 #  variables:
-#    DEPLOY_DIR: public/ppa
+#    PAGES_DIR: public/ppa
   environment:
     name: PPA
     url: http://${CI_PROJECT_NAMESPACE}.gitlab.io/${CI_PROJECT_NAME}
@@ -72,4 +73,3 @@ pages:
     - docker 
   only:
     - master
-
