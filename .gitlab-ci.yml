@@ -22,7 +22,7 @@ build_centos_7:
   stage: build
   script:
      - yum install epel-release -y
-     - yun install asciidoctor -y
+     - yum install asciidoctor -y
      - ci-build-pkg
   artifacts:
     expire_in: 1 day
