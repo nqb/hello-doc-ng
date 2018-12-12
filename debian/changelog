@@ -1,0 +1,6 @@
+hello-doc (1.8-1) UNRELEASED; urgency=low
+
+  * Initial release. Closes: #nnnn
+    <nnnn is the bug number of your ITP>
+
+ -- Nicolas Quiniou-Briand <nqb@inverse.ca>  Wed, 12 Dec 2018 13:21:05 +0100
