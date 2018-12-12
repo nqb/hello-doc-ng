@@ -21,7 +21,7 @@ build_centos_7:
 
 build_fedora_25:
   image: buildpkg/fedora:25
- stage: build
+  stage: build
   script:
      - ci-build-pkg
   artifacts:
