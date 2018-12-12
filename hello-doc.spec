@@ -1,5 +1,5 @@
 Name:           hello-doc
-Version:        1.7
+Version:        1.8
 Release:        1%{?dist}
 Summary:        Hello Doc project to test CI/CD pipeline
 
