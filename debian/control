@@ -1,5 +1,5 @@
 Source: hello-doc
-Section: unknown
+Section: devel
 Priority: extra
 Maintainer: Nicolas Quiniou-Briand <nqb@inverse.ca>
 Build-Depends: debhelper (>=9)
