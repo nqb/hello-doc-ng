@@ -1,4 +1,13 @@
----
+.build_job: &job_build
+  stage: build
+  script:
+     - apt-get update && apt-get -y dist-upgrade
+     - ci-build-pkg
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - result/*
+      
 stages:
  - build
  - sign
@@ -12,6 +21,8 @@ build_centos_7:
   image: buildpkg/centos:7
   stage: build
   script:
+     - yum install epel-release -y
+     - yun install asciidoctor -y
      - ci-build-pkg
   artifacts:
     expire_in: 1 day
