@@ -1,52 +1,75 @@
 ---
 stages:
-  - build
-  - test
-  - upload
-  
+- build
+- sign
+- deploy
+
 before_script:
-  - echo "Before script section"
-  - echo "For example you might run an update here or install a build dependency"
-  - echo "Or perhaps you might print out some debugging details"
-   
-after_script:
-  - echo "After script section"
-  - echo "For example you might do some cleanup here"
+  - unset http_proxy ; unset https_proxy
+  - env | grep ^CI_
 
-# use vale software to asciidoc syntax
-unit:asciidoc:
-  stage: build
-  image: jdkato/vale
-  script:
-    - vale README.asciidoc
-    
-build:debian:
-  image: debian:jessie-slim
+build_debian_stretch:
+  image: buildpkg/debian:stretch
   stage: build
   script:
-    - apt-get update && apt-get install asciidoctor -y
-    - echo "Install build tools"
-    - apt-get install build-essential -y
-    - make html
+     - ci-build-pkg
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - result/*
+  tags:
+    - docker
 
-build:centos:
-  image: centos:latest
+build_ubuntu_zesty:
+  image: buildpkg/ubuntu:zesty
   stage: build
   script:
-    - yum install -y epel-release
-    - yum install -y asciidoctor
-    - echo "Install build tools"
-    - yum groupinstall "Development Tools" -y
-    - make html
+     - ci-build-pkg
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - result/*
+  tags:
+    - docker
 
-test1:
-  stage: test
-  script: 
-    - echo "Do a test here"
-    - echo "For example run a test suite"
-   
-test2:
-  stage: test
-  script: 
-    - echo "Do another parallel test here"
-    - echo "For example run a lint test"
+sign:
+  image: buildpkg/debian:stretch
+  stage: sign
+#  variables:
+#    SIGN_USER: firstname.lastname@example.com
+#    GPG_PRIVATE_KEY:
+  script:
+    - ci-sign-pkg
+  dependencies:
+    - build_debian_stretch
+    - build_ubuntu_zesty
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - result/*
+  tags:
+    - docker
+
+
+pages:
+  image: buildpkg/debian:stretch
+  stage: deploy
+#  variables:
+#    DEPLOY_DIR: public/ppa
+  environment:
+    name: PPA
+    url: http://${CI_PROJECT_NAMESPACE}.gitlab.io/${CI_PROJECT_NAME}
+  script:
+    - ci-pages-ppa
+    - ci-pages-home
+    - ci-pages-tree
+  dependencies:
+    - sign
+  artifacts:
+    paths:
+      - public
+  tags:
+    - docker 
+  only:
+    - master
+
