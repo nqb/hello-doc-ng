@@ -7,61 +7,52 @@
     expire_in: 1 hour
     paths:
       - result/*
+  tags:
+    - docker
       
 stages:
  - build
  - sign
  - deploy
+ - staging
+ - production
 
 before_script:
   - unset http_proxy ; unset https_proxy
   - env | grep ^CI_
 
+# we use YAML anchors to define same parameters for all builds
+#
+build_debian_jessie:
+  image: buildpkg/debian:jessie
+  <<: *job_build
+
+build_debian_stretch:
+  image: buildpkg/debian:stretch
+  <<: *job_build
+
 build_centos_7:
   image: buildpkg/centos:7
-  stage: build
-  script:
-     - yum install epel-release -y
-     - yum install asciidoctor -y
-     - ci-build-pkg
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - result/*
-  tags:
-    - docker
-
-build_fedora_25:
-  image: buildpkg/fedora:25
-  stage: build
-  script:
-     - ci-build-pkg
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - result/*
-  tags:
-    - docker
-
+  <<: *job_build
 
 sign:
   image: buildpkg/debian:stretch
   stage: sign
-#  variables:
+#  secret variables defined:
 #    SIGN_USER: firstname.lastname@example.com
-#    GPG_PRIVATE_KEY:
+#    GPG_PRIVATE_KEY: `gpg --armor --export-secret-keys firstname.lastname@example.com`
   script:
     - ci-sign-pkg
   dependencies:
+    - build_debian_jessie
+    - build_debian_stretch
     - build_centos_7
-    - build_fedora_25
   artifacts:
     expire_in: 1 day
     paths:
       - result/*
   tags:
     - docker
-
 
 pages:
   image: buildpkg/debian:stretch
