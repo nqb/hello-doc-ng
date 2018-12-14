@@ -2,9 +2,9 @@ Source: hello-doc
 Section: unknown
 Priority: extra
 Maintainer: Nicolas Quiniou-Briand <nqb@inverse.ca>
-Build-Depends: debhelper (>=9)
+Build-Depends: debhelper (>=9), asciidoctor, ruby
 Standards-Version: 3.9.8
-Homepage: <insert the upstream URL, if relevant>
+Homepage: https://gitlab.com/nqb1/hello-doc/tags
 
 Package: hello-doc
 Section: doc
