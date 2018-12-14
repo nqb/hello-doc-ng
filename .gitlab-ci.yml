@@ -1,8 +1,5 @@
 .build_job: &job_build
   stage: build
-  script:
-     - apt-get update && apt-get -y dist-upgrade
-     - ci-build-pkg
   artifacts:
     expire_in: 1 hour
     paths:
@@ -22,18 +19,28 @@ before_script:
   - env | grep ^CI_
 
 # we use YAML anchors to define same parameters for all builds
-#
 build_debian_jessie:
   image: buildpkg/debian:jessie
   <<: *job_build
+  script:
+    # to have latest version of gitlab-builpkg-tools
+    - apt-get update && apt-get -y dist-upgrade
+    - ci-build-pkg
 
 build_debian_stretch:
   image: buildpkg/debian:stretch
   <<: *job_build
+  script:
+    - apt-get update && apt-get -y dist-upgrade
+    - ci-build-pkg
+
 
 build_centos_7:
   image: buildpkg/centos:7
   <<: *job_build
+  script:
+    - yum update -y && yum install epel-release -y
+    - ci-build-pkg
 
 sign:
   image: buildpkg/debian:stretch
