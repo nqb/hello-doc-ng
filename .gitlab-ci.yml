@@ -6,6 +6,20 @@
       - result/*
   tags:
     - docker
+
+.debian_script: &deb_script
+  script:
+    # to have latest version of gitlab-builpkg-tools
+    - apt-get update && apt-get -y dist-upgrade
+    # Converting to native package (don't use a tar archive)
+    - sed -i "1{s/-1) /$suffix) /}" debian/changelog
+    - sed -i 's/3.0 (quilt)/3.0 (native)/' debian/source/format
+    - ci-build-pkg
+
+.rhel_script: &rpm_script
+  script:
+    - yum update -y && yum install epel-release -y
+    - ci-build-pkg
       
 stages:
  - build
@@ -22,25 +36,19 @@ before_script:
 build_debian_jessie:
   image: buildpkg/debian:jessie
   <<: *job_build
-  script:
-    # to have latest version of gitlab-builpkg-tools
-    - apt-get update && apt-get -y dist-upgrade
-    - ci-build-pkg
+  <<: *deb_script
 
 build_debian_stretch:
   image: buildpkg/debian:stretch
   <<: *job_build
-  script:
-    - apt-get update && apt-get -y dist-upgrade
-    - ci-build-pkg
+  <<: *deb_script
 
 
 build_centos_7:
   image: buildpkg/centos:7
   <<: *job_build
-  script:
-    - yum update -y && yum install epel-release -y
-    - ci-build-pkg
+  <<: *rpm_script
+
 
 sign:
   image: buildpkg/debian:stretch
