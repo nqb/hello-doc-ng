@@ -26,7 +26,7 @@ stages:
  - sign
  - deploy
  - staging
- - production
+
 
 before_script:
   - unset http_proxy ; unset https_proxy
@@ -88,5 +88,17 @@ pages:
       - public
   tags:
     - docker 
+  only:
+    - master
+
+install:
+  image: debian:stretch
+  stage: staging
+  script:
+    - dpkg -i result/debian/*.deb
+  dependencies:
+    - sign
+  tags:
+    - docker
   only:
     - master
