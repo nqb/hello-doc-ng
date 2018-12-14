@@ -91,11 +91,12 @@ pages:
   only:
     - master
 
-install:
+install_debian_stretch:
   image: debian:stretch
   stage: staging
   script:
     - dpkg -i result/debian/stretch/*.deb
+    - head -1 /var/www/html/README.html
   dependencies:
     - sign
   tags:
@@ -103,11 +104,25 @@ install:
   only:
     - master
 
-install:
+install_debian_jessie:
+  image: debian:jessie
+  stage: staging
+  script:
+    - dpkg -i result/debian/jessie/*.deb
+    - head -1 /var/www/html/README.html
+  dependencies:
+    - sign
+  tags:
+    - docker
+  only:
+    - master
+
+install_centos_7:
   image: centos:7
   stage: staging
   script:
-    - yum localinstall result/centos/7/*.noarch.rpm
+    - yum localinstall result/centos/7/*.noarch.rpm -y
+    - head -1 /var/www/html/README.html
   dependencies:
     - sign
   tags:
