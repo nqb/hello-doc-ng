@@ -95,7 +95,19 @@ install:
   image: debian:stretch
   stage: staging
   script:
-    - dpkg -i result/debian/*.deb
+    - dpkg -i result/debian/stretch/*.deb
+  dependencies:
+    - sign
+  tags:
+    - docker
+  only:
+    - master
+
+install:
+  image: centos:7
+  stage: staging
+  script:
+    - yum localinstall result/centos/7/*.noarch.rpm
   dependencies:
     - sign
   tags:
