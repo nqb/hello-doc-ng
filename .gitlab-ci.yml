@@ -72,11 +72,11 @@ sign:
 pages:
   image: buildpkg/debian:stretch
   stage: deploy
-#  variables:
-#    PAGES_DIR: public/ppa
+  variables:
+    PAGES_DIR: public/${CI_COMMIT_REF_NAME}
   environment:
     name: PPA
-    url: http://${CI_PROJECT_NAMESPACE}.gitlab.io/${CI_PROJECT_NAME}/${CI_COMMIT_REF_NAME}/
+    url: http://${CI_PROJECT_NAMESPACE}.gitlab.io/${CI_PROJECT_NAME}/
   script:
     - ci-pages-ppa
     - ci-pages-home
