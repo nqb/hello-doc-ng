@@ -2,4 +2,4 @@
 
 [Build Status,link=https://gitlab.com/nqb1/hello-doc-ng/pipelines]
 
-My document provides....awesome doc !
+My document provides....awesome doc ! But not as awesome as Zayme
