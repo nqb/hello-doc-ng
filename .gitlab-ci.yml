@@ -87,9 +87,7 @@ pages:
     paths:
       - public
   tags:
-    - docker 
-  only:
-    - master
+    - docker
 
 install_debian_stretch:
   image: debian:stretch
