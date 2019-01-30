@@ -1,5 +1,3 @@
 = My Document's Title
 
-[Build Status,link=https://gitlab.com/nqb1/hello-doc-ng/pipelines]
-
 My document provides....awesome doc !
