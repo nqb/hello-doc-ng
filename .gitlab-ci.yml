@@ -128,11 +128,11 @@ install_centos_7:
   only:
     - master
 
-test_runner:
-  stage: test
-  script:
-    - wget https://apoda.inverse:1443/ --no-check-certificate
-  tags:
-    - glauca
-  only:
-    - master
+# test_runner:
+#   stage: test
+#   script:
+#     - wget https://apoda.inverse:1443/ --no-check-certificate
+#   tags:
+#     - glauca
+#   only:
+#     - master
