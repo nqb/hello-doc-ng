@@ -12,7 +12,7 @@
     # to have latest version of gitlab-builpkg-tools
     - apt-get update && apt-get -y dist-upgrade
     # Converting to native package (don't use a tar archive)
-    - sed -i "1{s/-1) /$suffix) /}" debian/changelog
+    - sed -i "1{s/-2) /$suffix) /}" debian/changelog
     - sed -i 's/3.0 (quilt)/3.0 (native)/' debian/source/format
     - ci-build-pkg
 
