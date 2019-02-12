@@ -1,12 +1,12 @@
-Source: hello-doc
+Source: hello-doc-ng
 Section: unknown
 Priority: extra
 Maintainer: Nicolas Quiniou-Briand <nqb@inverse.ca>
 Build-Depends: debhelper (>=9), asciidoctor, ruby
 Standards-Version: 3.9.8
-Homepage: https://gitlab.com/nqb1/hello-doc/tags
+Homepage: https://gitlab.com/nqb1/hello-doc-ng/tags
 
-Package: hello-doc
+Package: hello-doc-ng
 Section: doc
 Architecture: all
 Multi-Arch: foreign

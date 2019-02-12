@@ -1,4 +1,4 @@
-Name:           hello-doc
+Name:           hello-doc-ng
 Version:        1.8
 Release:        1%{?dist}
 Summary:        Hello Doc project to test CI/CD pipeline
