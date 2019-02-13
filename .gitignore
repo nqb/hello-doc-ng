@@ -1,3 +1,5 @@
 *~
 \#*\#
 *.html
+.kitchen/
+.kitchen.local.yml

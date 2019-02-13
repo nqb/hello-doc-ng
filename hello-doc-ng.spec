@@ -5,7 +5,7 @@ Summary:        Hello Doc project to test CI/CD pipeline
 
 License:        GPLv3+
 URL:            https://gitlab.com/nqb1/%{name}
-Source0:        https://gitlab.com/nqb1/%{name}/-/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:        %{name}-%{version}.tar.gz
 
 BuildRequires:  make
 BuildRequires:  ruby
