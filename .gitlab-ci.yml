@@ -25,8 +25,7 @@ stages:
  - build
  - sign
  - deploy
- - staging
- - test
+ - int_tests
 
 before_script:
   - unset http_proxy ; unset https_proxy
@@ -66,8 +65,6 @@ sign:
     expire_in: 1 day
     paths:
       - result/*
-  tags:
-    - docker
 
 pages:
   image: buildpkg/debian:stretch
@@ -86,47 +83,55 @@ pages:
   artifacts:
     paths:
       - public
-  tags:
-    - docker
 
-install_debian_stretch:
-  image: debian:stretch
-  stage: staging
+# install_debian_stretch:
+#   image: debian:stretch
+#   stage: staging
+#   script:
+#     - dpkg -i result/debian/stretch/*.deb
+#     - head -1 /var/www/html/README.html
+#   dependencies:
+#     - sign
+#   tags:
+#     - docker
+#   only:
+#     - master
+integration_tests:
+  stage: int_tests
   script:
-    - dpkg -i result/debian/stretch/*.deb
-    - head -1 /var/www/html/README.html
-  dependencies:
-    - sign
+    - git clone http://github.com/nqb/ansible-hello-doc-ng
+    - cd ansible-hello-doc-ng
+    - kitchen test
   tags:
-    - docker
+    - futura
   only:
     - master
 
-install_debian_jessie:
-  image: debian:jessie
-  stage: staging
-  script:
-    - dpkg -i result/debian/jessie/*.deb
-    - head -1 /var/www/html/README.html
-  dependencies:
-    - sign
-  tags:
-    - docker
-  only:
-    - master
+# install_debian_jessie:
+#   image: debian:jessie
+#   stage: staging
+#   script:
+#     - dpkg -i result/debian/jessie/*.deb
+#     - head -1 /var/www/html/README.html
+#   dependencies:
+#     - sign
+#   tags:
+#     - docker
+#   only:
+#     - master
 
-install_centos_7:
-  image: centos:7
-  stage: staging
-  script:
-    - yum localinstall result/centos/7/*.noarch.rpm -y
-    - head -1 /var/www/html/README.html
-  dependencies:
-    - sign
-  tags:
-    - docker
-  only:
-    - master
+# install_centos_7:
+#   image: centos:7
+#   stage: staging
+#   script:
+#     - yum localinstall result/centos/7/*.noarch.rpm -y
+#     - head -1 /var/www/html/README.html
+#   dependencies:
+#     - sign
+#   tags:
+#     - docker
+#   only:
+#     - master
 
 # test_runner:
 #   stage: test
