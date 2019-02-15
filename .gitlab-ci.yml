@@ -25,7 +25,6 @@ stages:
  - build
  - sign
  - deploy
- - staging
  - test
 
 before_script:
@@ -89,50 +88,50 @@ pages:
   tags:
     - docker
 
-install_debian_stretch:
-  image: debian:stretch
-  stage: staging
-  script:
-    - dpkg -i result/debian/stretch/*.deb
-    - head -1 /var/www/html/README.html
-  dependencies:
-    - sign
-  tags:
-    - docker
-  only:
-    - master
-
-install_debian_jessie:
-  image: debian:jessie
-  stage: staging
-  script:
-    - dpkg -i result/debian/jessie/*.deb
-    - head -1 /var/www/html/README.html
-  dependencies:
-    - sign
-  tags:
-    - docker
-  only:
-    - master
-
-install_centos_7:
-  image: centos:7
-  stage: staging
-  script:
-    - yum localinstall result/centos/7/*.noarch.rpm -y
-    - head -1 /var/www/html/README.html
-  dependencies:
-    - sign
-  tags:
-    - docker
-  only:
-    - master
-
-# test_runner:
-#   stage: test
+# install_debian_stretch:
+#   image: debian:stretch
+#   stage: staging
 #   script:
-#     - wget https://apoda.inverse:1443/ --no-check-certificate
+#     - dpkg -i result/debian/stretch/*.deb
+#     - head -1 /var/www/html/README.html
+#   dependencies:
+#     - sign
 #   tags:
-#     - glauca
+#     - docker
 #   only:
 #     - master
+
+# install_debian_jessie:
+#   image: debian:jessie
+#   stage: staging
+#   script:
+#     - dpkg -i result/debian/jessie/*.deb
+#     - head -1 /var/www/html/README.html
+#   dependencies:
+#     - sign
+#   tags:
+#     - docker
+#   only:
+#     - master
+
+# install_centos_7:
+#   image: centos:7
+#   stage: staging
+#   script:
+#     - yum localinstall result/centos/7/*.noarch.rpm -y
+#     - head -1 /var/www/html/README.html
+#   dependencies:
+#     - sign
+#   tags:
+#     - docker
+#   only:
+#     - master
+
+kitchen_tests:
+  stage: test
+  script:
+    - cd /home/gitlab-runner/git/ansible-hello-doc-ng
+    - git pull
+    - kitchen test
+  tags:
+    - futura
