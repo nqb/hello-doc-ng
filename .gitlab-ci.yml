@@ -130,6 +130,7 @@ pages:
 kitchen_tests:
   stage: test
   script:
+    - sleep 300
     - cd /home/gitlab-runner/git/ansible-hello-doc-ng
     - git pull
     - kitchen test
