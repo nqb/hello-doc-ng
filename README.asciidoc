@@ -6,4 +6,3 @@ image:https://gitlab.com/nqb1/hello-doc-ng/badges/master/pipeline.svg[link="http
 
 My document provides....awesome doc ! But not as awesome as Zayme
 
-Minor change
