@@ -31,6 +31,12 @@ before_script:
   - unset http_proxy ; unset https_proxy
   - env | grep ^CI_
 
+build_test:
+  image: buildpkg/debian:buster
+  <<: *job_build
+  <<: *deb_script
+  when: manual
+
 # we use YAML anchors to define same parameters for all builds
 build_debian_jessie:
   image: buildpkg/debian:jessie
