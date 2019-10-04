@@ -22,6 +22,7 @@
     - ci-build-pkg
       
 stages:
+ - manual
  - build
  - sign
  - deploy
@@ -31,6 +32,13 @@ before_script:
   - unset http_proxy ; unset https_proxy
   - env | grep ^CI_
 
+build_manual:
+  stage: manual
+  image: buildpkg/debian:buster
+  when: manual
+  script:
+    - echo $CI_JOB
+  
 build_test:
   image: buildpkg/debian:buster
   <<: *job_build
