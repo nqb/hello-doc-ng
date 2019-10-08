@@ -51,14 +51,18 @@ build_debian_jessie:
   <<: *job_build
   <<: *deb_script
   only:
-    - tags
+    - /^stable1$/
+  except:
+    - branches
 
 build_debian_stretch:
   image: buildpkg/debian:stretch
   <<: *job_build
   <<: *deb_script
   only:
-    - schedules
+    - /^testing1$/
+  except:
+    - branches
 
 
 build_centos_7:
