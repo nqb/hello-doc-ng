@@ -50,17 +50,23 @@ build_debian_jessie:
   image: buildpkg/debian:jessie
   <<: *job_build
   <<: *deb_script
+  only:
+    - tags
 
 build_debian_stretch:
   image: buildpkg/debian:stretch
   <<: *job_build
   <<: *deb_script
+  only:
+    - schedules
 
 
 build_centos_7:
   image: buildpkg/centos:7
   <<: *job_build
   <<: *rpm_script
+  only:
+    - web
 
 
 sign:
