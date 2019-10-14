@@ -38,7 +38,17 @@ build_manual:
   when: manual
   script:
     - echo $CI_JOB
-  
+
+build_release:
+  stage: build
+  image: buildpkg/debian:buster
+  variables:
+    DOCKER_TAG: $CI
+  script:
+    - echo $CI_JOB
+  only:
+    - /^stable$/
+
 build_test:
   image: buildpkg/debian:buster
   <<: *job_build
