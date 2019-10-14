@@ -45,9 +45,11 @@ build_release:
   variables:
     DOCKER_TAG: $CI
   script:
-    - echo $CI_JOB
+    - PF_VERSION=$(awk '{ print $2 }' conf/pf-release)
+    - echo $PF_VERSION
   only:
     - /^stable$/
+    - /^master$/
 
 build_test:
   image: buildpkg/debian:buster
