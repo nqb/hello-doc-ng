@@ -31,6 +31,7 @@ stages:
 before_script:
   - unset http_proxy ; unset https_proxy
   - env | grep ^CI_
+  - env | grep PF_VERSION
 
 build_manual:
   stage: manual
