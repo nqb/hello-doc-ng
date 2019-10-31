@@ -48,10 +48,19 @@ build_release:
   script:
     - echo $PF_VERSION
   only:
-    - /^stable$/
-    - /^master$/
     - /^packetfence-.*$/
 
+build_master:
+  stage: build
+  image: buildpkg/debian:buster
+  variables:
+    PF_VERSION: test
+  script:
+    - echo $PF_VERSION
+  only:
+    - /^master$/
+
+    
 build_test:
   image: buildpkg/debian:buster
   <<: *job_build
