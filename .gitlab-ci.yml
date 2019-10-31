@@ -45,8 +45,10 @@ build_release:
   image: buildpkg/debian:buster
   variables:
     PF_VERSION: ${CI_COMMIT_TAG#packetfence-}
+    RELEASE: ${CI_COMMIT_TAG}
   script:
     - echo $PF_VERSION
+    - echo $RELEASE
   only:
     - /^packetfence-.*$/
 
