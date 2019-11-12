@@ -17,4 +17,11 @@ build1:
     - .build_template
   script:
     - echo $my_global_variable
-    
+
+build2:
+  stage: build
+  variables:
+    my_global_variable: job value
+  script:
+    - echo $my_global_variable
+
