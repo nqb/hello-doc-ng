@@ -1,12 +1,18 @@
 stages:
  - build
 
+# variable def0
+# my_global_variable sets in UI to "UI value"
+
+
+# variable def1
 variables:
   my_global_variable: global value
  
 before_script:
   - echo $my_global_variable
 
+# variable def2  
 .build_template:
   variables:
     my_global_variable: extends value
@@ -20,8 +26,13 @@ build1:
 
 build2:
   stage: build
+# variable def3  
   variables:
     my_global_variable: job value
   script:
     - echo $my_global_variable
 
+build3:
+  stage: build
+  script:
+    - echo $my_global_variable
